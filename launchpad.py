@@ -44,7 +44,7 @@ class launchpad:
 		if not 0 <= green <=3: raise LaunchPadError("Bad green value %s" % green)
 
 		position = x+16*y
-		color = 16*red + green + 8 + 4
+		color = 16*green + red + 8 + 4
 		self.midiOut.WriteShort(0x90,position,color)
 
 if __name__=="__main__":

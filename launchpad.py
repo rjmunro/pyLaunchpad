@@ -28,6 +28,9 @@ class launchpad:
 		self.midiIn = pypm.Input(idIn)
 		self.midiOut = pypm.Output(idOut, 0)
 
+	def reset(self):
+		self.midiOut.WriteShort(0xb0, 0, 0)
+
 	def light(self, x, y, red, green):
 		position = x+16*y
 		color = 16*red + green + 8 + 4
@@ -37,6 +40,9 @@ if __name__=="__main__":
 	pypm.Initialize() # always call this first, or OS may crash when you try to open a stream
 	launchPads = findLaunchpads()
 	l = launchpad(*launchPads[0])
+
+	l.reset()
+
 	for i in range(8):
 		l.light(8,i,(i%2)*3,((i/2)%2)*3)
 

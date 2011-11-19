@@ -30,6 +30,8 @@ def findLaunchpads():
 class launchpad:
 	midiIn = None
 	midiOut = None
+	drumrackMode = False
+
 	def __init__(self, idIn, idOut):
 		self.midiIn = pypm.Input(idIn)
 		self.midiOut = pypm.Output(idOut, 0)
@@ -37,13 +39,27 @@ class launchpad:
 	def reset(self):
 		self.midiOut.WriteShort(0xb0, 0, 0)
 
+	def setDrumRackMode(self,drumrack=True):
+		self.drumrackMode = drumrack
+		self.midiOut.WriteShort(0xb0, 0, drumrack and 2 or 1)
+
 	def light(self, x, y, red, green):
 		if not 0 <= x <=8: raise LaunchPadError("Bad x value %s" % x)
 		if not 0 <= y <=7: raise LaunchPadError("Bad y value %s" % y)
 		if not 0 <= red <=3: raise LaunchPadError("Bad red value %s" % red)
 		if not 0 <= green <=3: raise LaunchPadError("Bad green value %s" % green)
 
-		position = x+16*y
+		if self.drumrackMode:
+			if x==8:
+				# Last column runs from 100 - 107
+				position = 107-y;
+			elif x<4:
+				position = 36 + x + 4*y
+			else:
+				# Second half starts at 68, but x will start at 4
+				position = 64 + x + 4*y
+		else:
+			position = x + 16*(7-y)
 		color = 16*green + red + 8 + 4
 		self.midiOut.WriteShort(0x90,position,color)
 
@@ -53,15 +69,16 @@ if __name__=="__main__":
 	l = launchpad(*launchPads[0])
 
 	l.reset()
+	l.setDrumRackMode()
 
 	for i in range(8):
 		l.light(8,i,(i%2)*3,((i/2)%2)*3)
 
 	for x in range(8):
 		for y in range(8):
-			#l.light(x,y,x%4,y%4)
-			time.sleep(.03)
-			l.light(x,y,0,0)
+			l.light(x,y,x%4,y%4)
+			time.sleep(.1)
+			#l.light(x,y,0,3)
 			print "%s%s" % (x,y),
 		print
 

@@ -47,7 +47,7 @@ if __name__=="__main__":
 		l.light(8,i,(i%2)*3,((i/2)%2)*3)
 
 	for x in range(8):
-		for y in range(9):
+		for y in range(8):
 			#l.light(x,y,x%4,y%4)
 			time.sleep(.03)
 			l.light(x,y,0,0)

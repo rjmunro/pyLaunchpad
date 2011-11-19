@@ -8,6 +8,12 @@ But that version doesn't compile on a modern python without patching.
 import pypm
 import time
 
+class LaunchPadError(Exception):
+	def __init__(self, value):
+		self.value = value
+	def __str__(self):
+		return repr(self.value)
+
 def findLaunchpads():
 	ins = []
 	outs = []
@@ -32,6 +38,11 @@ class launchpad:
 		self.midiOut.WriteShort(0xb0, 0, 0)
 
 	def light(self, x, y, red, green):
+		if not 0 <= x <=8: raise LaunchPadError("Bad x value %s" % x)
+		if not 0 <= y <=7: raise LaunchPadError("Bad y value %s" % y)
+		if not 0 <= red <=3: raise LaunchPadError("Bad red value %s" % red)
+		if not 0 <= green <=3: raise LaunchPadError("Bad green value %s" % green)
+
 		position = x+16*y
 		color = 16*red + green + 8 + 4
 		self.midiOut.WriteShort(0x90,position,color)

@@ -52,16 +52,16 @@ class launchpad:
 		if self.drumrackMode:
 			if x==8:
 				# Last column runs from 100 - 107
-				position = 107-y;
+				note = 107-y;
 			elif x<4:
-				position = 36 + x + 4*y
+				note = 36 + x + 4*y
 			else:
 				# Second half starts at 68, but x will start at 4
-				position = 64 + x + 4*y
+				note = 64 + x + 4*y
 		else:
-			position = x + 16*(7-y)
-		color = 16*green + red + 8 + 4
-		self.midiOut.WriteShort(0x90,position,color)
+			note = x + 16*(7-y)
+		velocity = 16*green + red + 8 + 4
+		self.midiOut.WriteShort(0x90,note,velocity)
 
 if __name__=="__main__":
 	pypm.Initialize() # always call this first, or OS may crash when you try to open a stream

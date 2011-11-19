@@ -38,6 +38,7 @@ class launchpad:
 
 	def reset(self):
 		self.midiOut.WriteShort(0xb0, 0, 0)
+		self.drumrackMode = False
 
 	def setDrumRackMode(self,drumrack=True):
 		self.drumrackMode = drumrack

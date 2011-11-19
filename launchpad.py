@@ -13,15 +13,11 @@ def findLaunchpads():
 	outs = []
 	for loop in range(pypm.CountDevices()):
 		interf,name,inp,outp,opened = pypm.GetDeviceInfo(loop)
-		print loop, name," ",
-		print (inp == 1) and "(input) " or "(output) ",
-		print (opened == 1) and "(opened)" or "(unopened)"
 		if name=="Launchpad":
 			if inp:
 				ins.append(loop)
 			else:
 				outs.append(loop)
-	print
 	return zip(ins,outs)
 
 
@@ -41,7 +37,6 @@ if __name__=="__main__":
 	pypm.Initialize() # always call this first, or OS may crash when you try to open a stream
 	launchPads = findLaunchpads()
 	l = launchpad(*launchPads[0])
-	print l,l.midiIn,l.midiOut
 	for i in range(8):
 		l.light(8,i,(i%2)*3,((i/2)%2)*3)
 

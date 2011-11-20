@@ -85,6 +85,30 @@ class launchpad:
 
 		self.midiOut.WriteShort(0x90,note,velocity)
 
+	def lightAll(self, levels):
+		velocity = 0
+		for level in _orderAll(levels):
+			red = level[0]
+			green = level[1]
+			if velocity:
+				velocity2 = 16*green + red + 8 + 4
+				self.midiOut.WriteShort(0x90, velocity, velocity2)
+				velocity = 0
+			else:
+				velocity = 16*green + red + 8 + 4
+
+	def _orderAll(levels):
+		for y in range(8):
+			for x in range(8):
+				yield levels[x][y]
+		x = 9
+		for y in range(8):
+			yield levels[x][y]
+
+		y = 9
+		for x in range(8):
+			yield levels[x][y]
+
 if __name__=="__main__":
 	pypm.Initialize() # always call this first, or OS may crash when you try to open a stream
 	launchPads = findLaunchpads()

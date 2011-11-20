@@ -3,6 +3,9 @@
 
 Requires pyPortMidi from http://alumni.media.mit.edu/~harrison/code.html
 But that version doesn't compile on a modern python without patching.
+
+TODO:
+	LED double-buffering and flashing
 """
 
 import pypm

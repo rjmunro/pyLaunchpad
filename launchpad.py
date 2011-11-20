@@ -45,6 +45,14 @@ class launchpad:
 		self.midiOut.WriteShort(0xb0, 0, 124 + brightness)
 		self.drumrackMode = False
 
+	def setDutyCycle(self, numerator, denominator):
+		if numerator < 9:
+			data = (16 * (numerator - 1)) + (denominator - 3)
+			self.midiOut.WriteShort(0xb0, 0x1e, data)
+		else:
+			data = (16 * (numerator - 9)) + (denominator - 3)
+			self.midiOut.WriteShort(0xb0, 0x1f, data)
+
 	def setDrumRackMode(self,drumrack=True):
 		self.drumrackMode = drumrack
 		self.midiOut.WriteShort(0xb0, 0, drumrack and 2 or 1)

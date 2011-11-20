@@ -90,25 +90,27 @@ class launchpad:
 
 	def lightAll(self, levels):
 		velocity = 0
-		for level in _orderAll(levels):
+		for level in self._orderAll(levels):
 			red = level[0]
 			green = level[1]
 			if velocity:
 				velocity2 = 16*green + red + 8 + 4
-				self._midiOut.WriteShort(0x90, velocity, velocity2)
+				self._midiOut.WriteShort(0x92, velocity, velocity2)
+				time.sleep(.001)
 				velocity = 0
 			else:
 				velocity = 16*green + red + 8 + 4
+		self.light(0,0,levels[0][0][0],levels[0][0][1])
 
-	def _orderAll(levels):
+	def _orderAll(self,levels):
 		for y in range(8):
 			for x in range(8):
-				yield levels[x][y]
-		x = 9
+				yield levels[x][7-y]
+		x = 8
 		for y in range(8):
-			yield levels[x][y]
+			yield levels[x][7-y]
 
-		y = 9
+		y = 8
 		for x in range(8):
 			yield levels[x][y]
 

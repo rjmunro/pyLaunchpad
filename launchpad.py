@@ -40,7 +40,7 @@ class launchpad:
 		self.midiOut.WriteShort(0xb0, 0, 0)
 		self.drumrackMode = False
 
-	def allLeds(self, brightness):
+	def ledTest(self, brightness):
 		if not 1 <= brightness <= 3: raise LaunchPadError("Bad brightness value %s" % brightness)
 		self.midiOut.WriteShort(0xb0, 0, 124 + brightness)
 		self.drumrackMode = False

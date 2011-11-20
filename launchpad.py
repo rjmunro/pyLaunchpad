@@ -31,34 +31,34 @@ def findLaunchpads():
 
 
 class launchpad:
-	midiIn = None
-	midiOut = None
-	drumrackMode = False
+	_midiIn = None
+	_midiOut = None
+	_drumrackMode = False
 
 	def __init__(self, idIn, idOut):
-		self.midiIn = pypm.Input(idIn)
-		self.midiOut = pypm.Output(idOut, 0)
+		self._midiIn = pypm.Input(idIn)
+		self._midiOut = pypm.Output(idOut, 0)
 
 	def reset(self):
-		self.midiOut.WriteShort(0xb0, 0, 0)
-		self.drumrackMode = False
+		self._midiOut.WriteShort(0xb0, 0, 0)
+		self._drumrackMode = False
 
 	def ledTest(self, brightness):
 		if not 1 <= brightness <= 3: raise LaunchPadError("Bad brightness value %s" % brightness)
-		self.midiOut.WriteShort(0xb0, 0, 124 + brightness)
-		self.drumrackMode = False
+		self._midiOut.WriteShort(0xb0, 0, 124 + brightness)
+		self._drumrackMode = False
 
 	def setDutyCycle(self, numerator, denominator):
 		if numerator < 9:
 			data = (16 * (numerator - 1)) + (denominator - 3)
-			self.midiOut.WriteShort(0xb0, 0x1e, data)
+			self._midiOut.WriteShort(0xb0, 0x1e, data)
 		else:
 			data = (16 * (numerator - 9)) + (denominator - 3)
-			self.midiOut.WriteShort(0xb0, 0x1f, data)
+			self._midiOut.WriteShort(0xb0, 0x1f, data)
 
-	def setDrumRackMode(self,drumrack=True):
-		self.drumrackMode = drumrack
-		self.midiOut.WriteShort(0xb0, 0, drumrack and 2 or 1)
+	def setDrumRackMode(self, drumrack=True):
+		self._drumrackMode = drumrack
+		self._midiOut.WriteShort(0xb0, 0, drumrack and 2 or 1)
 
 	def light(self, x, y, red, green):
 		if not 0 <= x <= 8: raise LaunchPadError("Bad x value %s" % x)
@@ -71,10 +71,10 @@ class launchpad:
 		if y==8:
 			if x != 8:
 				note = 104 + x
-				self.midiOut.WriteShort(0xb0,note,velocity)
+				self._midiOut.WriteShort(0xb0,note,velocity)
 			return
 
-		if self.drumrackMode:
+		if self._drumrackMode:
 			if x==8:
 				# Last column runs from 100 - 107
 				note = 107-y;
@@ -86,7 +86,7 @@ class launchpad:
 		else:
 			note = x + 16*(7-y)
 
-		self.midiOut.WriteShort(0x90,note,velocity)
+		self._midiOut.WriteShort(0x90,note,velocity)
 
 	def lightAll(self, levels):
 		velocity = 0
@@ -95,7 +95,7 @@ class launchpad:
 			green = level[1]
 			if velocity:
 				velocity2 = 16*green + red + 8 + 4
-				self.midiOut.WriteShort(0x90, velocity, velocity2)
+				self._midiOut.WriteShort(0x90, velocity, velocity2)
 				velocity = 0
 			else:
 				velocity = 16*green + red + 8 + 4

@@ -9,7 +9,6 @@ TODO:
 """
 
 import pypm
-import time
 
 class LaunchPadError(Exception):
 	def __init__(self, value):
@@ -96,7 +95,6 @@ class launchpad:
 			if velocity:
 				velocity2 = 16*green + red + 8 + 4
 				self._midiOut.WriteShort(0x92, velocity, velocity2)
-				time.sleep(.001)
 				velocity = 0
 			else:
 				velocity = 16*green + red + 8 + 4
@@ -128,9 +126,14 @@ class launchpad:
 pypm.Initialize()
 
 if __name__=="__main__":
+	import time
+
 	launchPads = findLaunchpads()
 	l = launchpad(*launchPads[0])
 
 	l.reset()
 	l.setDrumRackMode()
 	l.lightSingleTest()
+
+	# Wait half a second before exiting to make sure all data has got out.
+	time.sleep(.5)

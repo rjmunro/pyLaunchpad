@@ -114,6 +114,15 @@ class launchpad:
 		for x in range(8):
 			yield levels[x][y]
 
+
+
+	def lightSingleTest(self):
+		for x in range(8):
+			for y in range(8):
+				self.light(x,y,x%4,y%4)
+
+
+
 # I don't know if the below is needed, or if it is safe to call automatically, but the comment in the example I'm copying said:
 # always call this first, or OS may crash when you try to open a stream
 pypm.Initialize()
@@ -124,9 +133,4 @@ if __name__=="__main__":
 
 	l.reset()
 	l.setDrumRackMode()
-
-	for x in range(8):
-		for y in range(8):
-			l.light(x,y,x%4,y%4)
-			time.sleep(.1)
-
+	l.lightSingleTest()

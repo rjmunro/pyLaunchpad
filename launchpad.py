@@ -1,4 +1,5 @@
 #!/usr/bin/env python2.7
+# vim: set fileencoding=UTF-8 :
 """Python interface for Novation Launchpads
 
 Requires pyPortMidi from http://alumni.media.mit.edu/~harrison/code.html

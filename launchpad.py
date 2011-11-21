@@ -120,6 +120,15 @@ class launchpad:
 			for y in range(8):
 				self.light(x,y,x%4,y%4)
 
+	def lightAllTest(self):
+		grid = []
+		for x in range(9):
+			grid.append([])
+			for y in range(9):
+				grid[x].append( (x%4, y%4) )
+
+		self.lightAll(grid)
+
 
 
 # I don't know if the below is needed, or if it is safe to call automatically, but the comment in the example I'm copying said:
@@ -134,7 +143,8 @@ if __name__=="__main__":
 
 	l.reset()
 	l.setDrumRackMode()
-	l.lightSingleTest()
+	l.lightAllTest()
+	#l.lightSingleTest()
 
 	# Wait half a second before exiting to make sure all data has got out.
 	time.sleep(.5)

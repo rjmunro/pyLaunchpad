@@ -114,8 +114,11 @@ class launchpad:
 		for x in range(8):
 			yield levels[x][y]
 
+# I don't know if the below is needed, or if it is safe to call automatically, but the comment in the example I'm copying said:
+# always call this first, or OS may crash when you try to open a stream
+pypm.Initialize()
+
 if __name__=="__main__":
-	pypm.Initialize() # always call this first, or OS may crash when you try to open a stream
 	launchPads = findLaunchpads()
 	l = launchpad(*launchPads[0])
 

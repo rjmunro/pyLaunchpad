@@ -25,7 +25,7 @@ if __name__=="__main__":
 	xsize,ysize = im.size
 
     
-	for startx in range(xsize-8):
+	for startx in range(max(xsize-8,1)):
 		showImage(im, startx)
 		time.sleep(.1)
 

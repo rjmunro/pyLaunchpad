@@ -120,12 +120,15 @@ class launchpad:
 			for y in range(8):
 				self.light(x,y,x%4,y%4)
 
-	def lightAllTest(self):
+	def lightAllTest(self,r=None,g=None):
 		grid = []
 		for x in range(9):
 			grid.append([])
 			for y in range(9):
-				grid[x].append( (x%4, y%4) )
+				if (r==None):
+					grid[x].append( (x%4, y%4) )
+				else:
+					grid[x].append( (r%4, g%4) )
 
 		self.lightAll(grid)
 

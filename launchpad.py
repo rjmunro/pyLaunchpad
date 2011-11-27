@@ -132,7 +132,30 @@ class launchpad:
 
 		self.lightAll(grid)
 
-
+	def poll(self):
+		if self._midiIn.Poll():
+			data = self._midiIn.Read(1);
+			[status,note,velocity,extraData] = data[0][0]
+			if status == 176:
+				y = 8
+				x = note - 104
+				print x, y
+			elif self._drumrackMode:
+				if note>99:
+					x=8
+					y=107-note
+				else:
+					x = note % 4
+					y = (note/4)-9
+					if y>7:
+						x += 4
+						y -= 8
+			else: # Normal mode
+				x = note % 16
+				y = 7 - (note / 16)
+			print x,y,velocity==127
+			return x,y,velocity==127
+		return None
 
 # I don't know if the below is needed, or if it is safe to call automatically, but the comment in the example I'm copying said:
 # always call this first, or OS may crash when you try to open a stream

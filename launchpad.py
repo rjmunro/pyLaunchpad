@@ -22,7 +22,7 @@ def findLaunchpads():
 	outs = []
 	for loop in range(pypm.CountDevices()):
 		interf,name,inp,outp,opened = pypm.GetDeviceInfo(loop)
-		if name=="Launchpad":
+		if name.startswith("Launchpad"):
 			if inp:
 				ins.append(loop)
 			else:

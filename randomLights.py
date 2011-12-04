@@ -21,3 +21,4 @@ if __name__=="__main__":
 			g = random.randint(0, 3)
 
 			l.light(x,y,r,g)
+			l.poll()

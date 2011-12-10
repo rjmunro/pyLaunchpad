@@ -8,10 +8,10 @@ if __name__=="__main__":
 	launchPadObjs = []
 	for l in launchPads:
 		launchPadObjs.append(launchpad.launchpad(*l))
+		launchPadObjs[-1].setDrumRackMode()
 
 	#l.reset()
 	#l.ledTest(1)
-	#l.setDrumRackMode()
 
 	while 1:
 		for l in launchPadObjs:

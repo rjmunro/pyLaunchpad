@@ -10,7 +10,7 @@ def showImage(im, offsetx=0, offsety=0):
 	for x in range(9):
 		grid.append([])
 		for y in range(9):
-			r,g,b = im.getpixel(((x + offsetx) % xsize, (8-y + offsety) % ysize))
+			r,g,b = im.getpixel(((x + offsetx) % xsize, (8-y + offsety) % ysize))[:3]
 			grid[x].append((r/64, g/64))
 	l.lightAll(grid)
 

@@ -29,4 +29,5 @@ if __name__=="__main__":
 		showImage(im, startx)
 		time.sleep(.1)
 
+	# Sleep to allow buffer to empty
 	time.sleep(1)

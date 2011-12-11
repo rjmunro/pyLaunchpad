@@ -159,6 +159,16 @@ class launchpad:
 			print x,y,velocity==127
 			return x,y,velocity==127
 		return None
+	
+	def showImage(self, im, offsetx=0, offsety=0):
+		grid = []
+		xsize,ysize = im.size
+		for x in range(9):
+			grid.append([])
+			for y in range(9):
+				r,g,b = im.getpixel(((x + offsetx) % xsize, (8-y + offsety) % ysize))[:3]
+				grid[x].append((r/64, g/64))
+		self.lightAll(grid)
 
 # I don't know if the below is needed, or if it is safe to call automatically, but the comment in the example I'm copying said:
 # always call this first, or OS may crash when you try to open a stream

@@ -16,17 +16,18 @@ def showImage(im, offsetx=0, offsety=0):
 
 if __name__=="__main__":
 	launchPads = launchpad.findLaunchpads()
-	l = launchpad.launchpad(*launchPads[0])
-
-	l.reset()
-	l.setDrumRackMode()
+	launchPadObjs = []
+	for l in launchPads:
+		launchPadObjs.append(launchpad.launchpad(*l))
 
 	im = Image.open(sys.argv[1])
 	xsize,ysize = im.size
 
-    
-	for startx in range(max(xsize-8,1)):
-		showImage(im, startx)
+	for startx in range(max(xsize-(11*len(launchPads)/2)+3,1)):
+		for padx in range(len(launchPads) / 2):
+			for pady in range(2):
+				l = launchPadObjs[padx*2+pady]
+				showImage(im, 11*padx + startx, 10*pady)
 		time.sleep(.1)
 
 	# Sleep to allow buffer to empty

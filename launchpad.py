@@ -9,7 +9,10 @@ TODO:
 	LED double-buffering and flashing
 """
 
-import pypm
+try:
+	import pypm
+except ImportError:
+	from pygame import pypm
 
 class LaunchPadError(Exception):
 	def __init__(self, value):

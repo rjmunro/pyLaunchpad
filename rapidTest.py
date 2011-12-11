@@ -4,7 +4,7 @@ import time
 
 if __name__=="__main__":
 	launchPads = launchpad.findLaunchpads()
-	l = launchpad.launchpad(*launchPads[0])
+	l = launchpad.launchpad(*launchPads[-1])
 
 	l.reset()
 	l.ledTest(1)

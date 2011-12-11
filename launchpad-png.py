@@ -19,6 +19,7 @@ if __name__=="__main__":
 	launchPadObjs = []
 	for l in launchPads:
 		launchPadObjs.append(launchpad.launchpad(*l))
+		launchPadObjs[-1].reset()
 
 	im = Image.open(sys.argv[1])
 	xsize,ysize = im.size

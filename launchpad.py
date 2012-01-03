@@ -3,7 +3,8 @@
 """Python interface for Novation Launchpads
 
 Requires pyPortMidi from http://alumni.media.mit.edu/~harrison/code.html
-But that version doesn't compile on a modern python without patching.
+But that version doesn't compile on a modern python without patching. You
+can instead use pyGame's MIDI support which is more up to date.
 
 TODO:
 	LED double-buffering and flashing

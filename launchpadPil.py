@@ -5,13 +5,11 @@ import time
 import sys
 import Image
 
-SIM = True
-
 # Set up launchpads
-if SIM:
+launchPads = launchpad.findLaunchpads()
+if not launchPads:
 	launchPadObjs = launchpadSim.setup6()
 else:
-	launchPads = launchpad.findLaunchpads()
 	launchPadObjs = []
 	for l in launchPads:
 		launchPadObjs.append(launchpad.launchpad(*l))

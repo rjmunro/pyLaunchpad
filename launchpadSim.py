@@ -116,20 +116,20 @@ class Launchpad:
 		self.lightAll(grid)
 
 def setup6():
-	(width, height) = (406, 250)
-	screen = pygame.display.set_mode((width, height))
+	return setupMany(3,2)
 
+def setupMany(xcount,ycount):
 	xspacing = 132
 	yspacing = 120
+	(width, height) = (10+xcount*xspacing, 10+ycount*yspacing)
+	screen = pygame.display.set_mode((width, height))
+
 	start = 20
-	launchpads = [
-			Launchpad(screen, start, start, 4),
-			Launchpad(screen, start, start + yspacing, 4),
-			Launchpad(screen, start + xspacing, start, 4),
-			Launchpad(screen, start + xspacing, start + yspacing, 4),
-			Launchpad(screen, start + xspacing * 2, start, 4),
-			Launchpad(screen, start + xspacing * 2, start + yspacing, 4),
-		]
+	launchpads = []
+	for x in range(xcount):
+		for y in range(ycount):
+			launchpads.append(Launchpad(screen, start + x * xspacing, start + y * yspacing, 4))
+
 	for l in launchpads:
 		l.reset()
 	

@@ -131,15 +131,16 @@ def setup6():
 	(width, height) = (370, 250)
 	screen = pygame.display.set_mode((width, height))
 
-	spacing = 120
+	xspacing = 120
+	yspacing = 120
 	start = 20
 	launchpads = [
 			Launchpad(screen, start, start, 4),
-			Launchpad(screen, start, start + spacing, 4),
-			Launchpad(screen, start + spacing, start, 4),
-			Launchpad(screen, start + spacing, start + spacing, 4),
-			Launchpad(screen, start + spacing * 2, start, 4),
-			Launchpad(screen, start + spacing * 2, start + spacing, 4),
+			Launchpad(screen, start, start + yspacing, 4),
+			Launchpad(screen, start + xspacing, start, 4),
+			Launchpad(screen, start + xspacing, start + yspacing, 4),
+			Launchpad(screen, start + xspacing * 2, start, 4),
+			Launchpad(screen, start + xspacing * 2, start + yspacing, 4),
 		]
 	for l in launchpads:
 		l.reset()

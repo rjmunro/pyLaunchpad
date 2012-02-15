@@ -44,7 +44,7 @@ def fireEffect(im):
 			b = im.getpixel((x,y+1))
 			c = im.getpixel((x+1,y+1))
 
-			average = [sum(i)*5/16 for i in zip(a,b,c)]
+			average = [sum(i)*5/17 for i in zip(a,b,c)]
 			if average[1]>average[0]:
 				print a, b, c, average
 				exit()

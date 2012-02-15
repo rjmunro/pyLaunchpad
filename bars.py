@@ -27,10 +27,42 @@ def getLevelsPil():
 			yield im
 		levels = newLevels
 
+def fireEffect(im):
+	(xsize,ysize) = im.size
+
+	# Draw bottom row randomly
+	for x in range(xsize):
+		red = min(random.randint(0,300),255)
+		green = random.randint(0,red**2/255)
+		im.putpixel((x,ysize-1),(red,green,0))
+
+	# Draw all other rows by averaging those below
+	for y in range(ysize-1):
+		for x in range(1,xsize-2):
+			a = im.getpixel((x-1,y+1))
+			b = im.getpixel((x,y+1))
+			c = im.getpixel((x+1,y+1))
+
+			average = [sum(i)*5/16 for i in zip(a,b,c)]
+			if average[1]>average[0]:
+				print a, b, c, average
+				exit()
+
+			im.putpixel((x,y),tuple(average))
+
+	return im
+
+
 import launchpadPil
 count = 0
+im = Image.new('RGB',(31,20))
+for i in range(1000):
+	im = fireEffect(im)
+	launchpadPil.drawImage(im)
 text = Image.open("images/novation.png");
 for im in getLevelsPil():
 	count +=1
 	im.paste(text,(30-count,0))
 	launchpadPil.drawImage(im)
+
+

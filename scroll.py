@@ -19,6 +19,9 @@ def scrollSequence(sequence, minwidth=70):
 
 def scrollText(text, minwidth=70):
 	map = {
+		"'":"quote",
+		",":"comma",
+		".":"stop",
 	}
 	sequence = []
 	for i in text:

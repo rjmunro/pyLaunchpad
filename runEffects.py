@@ -18,7 +18,7 @@ if __name__ == "__main__":
 	from fire import fireEffect
 	from scroll import scrollImage, scrollText
 	while 1:
-		runEffect(scrollText("Novation Launchpad is a 64 button music controller that enables you to make music or mix tracks by other artists You dont need advanced musical knowledge just your own creativity abec23rjkwefnkejnfe"))
+		runEffect(scrollText("Novation Launchpad is a 64 button 'music controller' that enables you to make music or mix tracks by other artists. You don't need advanced musical knowledge, just your own creativity."))
 		runEffect(scrollImage(Image.open("images/novation-launchpad-2line.png")))
 		runEffect(vuBarsEffect(),100)
 		runEffect(fireEffect(Image.new('RGB',(31,20))),100)

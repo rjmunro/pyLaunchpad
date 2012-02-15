@@ -48,7 +48,7 @@ def fireEffect(im):
 			b = im.getpixel((x,y+1))
 			c = im.getpixel((x+1,y+1))
 
-			average = temp2color(sum([color2temp(i) for i in a,b,c])*5/17)
+			average = temp2color(sum([color2temp(i) for i in a,b,c])/3-(500/ysize))
 
 			im.putpixel((x,y),tuple(average))
 

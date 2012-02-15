@@ -10,9 +10,12 @@ def scrollImage(im):
 
 def runEffect(ef, count = 10000):
 	while count!=0:
-		im = ef.next()
-		if not im:
+		try:
+			im = ef.next()
+		except StopIteration:
 			break
+		if not im:
+			StopIteration
 		launchpadPil.drawImage(im.crop((0,0,31,20)))
 		count -= 1
 

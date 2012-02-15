@@ -3,6 +3,7 @@ import random
 import Image
 import ImageDraw
 import ImageFont
+import launchpadPil
 
 STEPS = 8
 LOOPS = 8
@@ -11,7 +12,7 @@ def getLevelsPil():
 	levels = [random.randint(0,8) for i in range(9)]
 	im = Image.new('RGB',(31,20))
 	draw = ImageDraw.Draw(im)
-	for count in range(LOOPS):
+	while 1:
 		newLevels = [random.randint(0,8) for i in range(9)]
 		for step in range(STEPS):
 			draw.rectangle((0,0,33,20),fill=(0,0,0))
@@ -27,7 +28,7 @@ def getLevelsPil():
 			yield im
 		levels = newLevels
 
-def fireEffect(im):
+def fireEffect(im, loops = 200):
 	(xsize,ysize) = im.size
 
 	def color2temp((r,g,b)):
@@ -35,36 +36,47 @@ def fireEffect(im):
 
 	def temp2color(temp):
 		return (min(temp,255),min(max(temp-255,0),255),max(temp-511,0))
+	
+	while loops!=0:
+		# Draw bottom row randomly
+		for x in range(xsize):
+			temp = random.randint(100,768)
+			im.putpixel((x,ysize-1),(temp2color(temp)))
 
-	# Draw bottom row randomly
-	for x in range(xsize):
-		temp = random.randint(100,768)
-		im.putpixel((x,ysize-1),(temp2color(temp)))
+		# Draw all other rows by averaging those below
+		for y in range(ysize-1):
+			# Blank pixels at edge
+			im.putpixel((0,y),(0,0,0))
+			im.putpixel((xsize-1,y),(0,0,0))
+			
+			for x in range(1,xsize-2):
+				a = im.getpixel((x-1,y+1))
+				b = im.getpixel((x,y+1))
+				c = im.getpixel((x+1,y+1))
 
-	# Draw all other rows by averaging those below
-	for y in range(ysize-1):
-		for x in range(1,xsize-2):
-			a = im.getpixel((x-1,y+1))
-			b = im.getpixel((x,y+1))
-			c = im.getpixel((x+1,y+1))
+				average = temp2color(sum([color2temp(i) for i in a,b,c])/3-(500/ysize))
 
-			average = temp2color(sum([color2temp(i) for i in a,b,c])/3-(500/ysize))
+				im.putpixel((x,y),tuple(average))
 
-			im.putpixel((x,y),tuple(average))
+		yield im
+		loops -= 1
 
-	return im
+def scrollImage(im):
+	while im.size[0]>0:
+		im = im.crop((1,0)+im.size)
+		yield(im)
+	yield False
 
+def runEffect(ef, count = 10000):
+	while count!=0:
+		im = ef.next()
+		if not im:
+			break
+		launchpadPil.drawImage(im.crop((0,0,31,20)))
+		count -= 1
 
-import launchpadPil
-count = 0
-im = Image.new('RGB',(31,20))
-for i in range(300):
-	im = fireEffect(im)
-	launchpadPil.drawImage(im)
-text = Image.open("images/novation.png");
-for im in getLevelsPil():
-	count +=1
-	im.paste(text,(30-count,0))
-	launchpadPil.drawImage(im)
-
-
+if __name__ == "__main__":
+	while 1:
+		runEffect(scrollImage(Image.open("images/novation-launchpad-2line.png")))
+		runEffect(getLevelsPil(),100)
+		runEffect(fireEffect(Image.new('RGB',(31,20))),100)

@@ -14,18 +14,6 @@ class LaunchpadError(Exception):
 	def __str__(self):
 		return repr(self.value)
 
-def findLaunchpads():
-	ins = []
-	outs = []
-	for loop in range(pypm.CountDevices()):
-		interf,name,inp,outp,opened = pypm.GetDeviceInfo(loop)
-		if name.startswith("Launchpad"):
-			if inp:
-				ins.append(loop)
-			else:
-				outs.append(loop)
-	return zip(ins,outs)
-
 
 class Launchpad:
 	_window = None

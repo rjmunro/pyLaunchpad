@@ -118,9 +118,9 @@ class Launchpad:
 def setup6():
 	return setupMany(3,2)
 
-def setupMany(xcount,ycount):
-	xspacing = 132
-	yspacing = 120
+def setupMany(xcount,ycount,size=4,xskip=2,yskip=1):
+	xspacing = size * (27 + 3 * xskip)
+	yspacing = size * (27 + 3 * yskip)
 	(width, height) = (10+xcount*xspacing, 10+ycount*yspacing)
 	screen = pygame.display.set_mode((width, height))
 
@@ -128,7 +128,7 @@ def setupMany(xcount,ycount):
 	launchpads = []
 	for x in range(xcount):
 		for y in range(ycount):
-			launchpads.append(Launchpad(screen, start + x * xspacing, start + y * yspacing, 4))
+			launchpads.append(Launchpad(screen, start + x * xspacing, start + y * yspacing, size))
 
 	for l in launchpads:
 		l.reset()

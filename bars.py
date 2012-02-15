@@ -5,7 +5,7 @@ import ImageDraw
 import ImageFont
 
 STEPS = 8
-LOOPS = 5
+LOOPS = 8
 
 def getLevelsPil():
 	levels = [random.randint(0,8) for i in range(9)]

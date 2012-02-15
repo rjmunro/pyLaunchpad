@@ -2,12 +2,6 @@
 import Image
 import launchpadPil
 
-def scrollImage(im):
-	while im.size[0]>0:
-		im = im.crop((1,0)+im.size)
-		yield(im)
-	yield False
-
 def runEffect(ef, count = 10000):
 	while count!=0:
 		try:
@@ -22,6 +16,7 @@ def runEffect(ef, count = 10000):
 if __name__ == "__main__":
 	from bars import vuBarsEffect
 	from fire import fireEffect
+	from scroll import scrollImage
 	while 1:
 		runEffect(scrollImage(Image.open("images/novation-launchpad-2line.png")))
 		runEffect(vuBarsEffect(),100)

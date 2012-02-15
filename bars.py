@@ -32,8 +32,9 @@ def fireEffect(im):
 
 	# Draw bottom row randomly
 	for x in range(xsize):
-		red = min(random.randint(0,300),255)
-		green = random.randint(0,red**2/255)
+		temp = random.randint(100,512)
+		red = min(temp,255)
+		green = max(temp-255,0)
 		im.putpixel((x,ysize-1),(red,green,0))
 
 	# Draw all other rows by averaging those below

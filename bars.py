@@ -58,7 +58,7 @@ def fireEffect(im):
 import launchpadPil
 count = 0
 im = Image.new('RGB',(31,20))
-for i in range(1000):
+for i in range(300):
 	im = fireEffect(im)
 	launchpadPil.drawImage(im)
 text = Image.open("images/novation.png");

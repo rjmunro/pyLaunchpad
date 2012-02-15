@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import Image
-import launchpadPil
+from launchpadCollection import LaunchpadCollection
+
+launchpads = LaunchpadCollection(3,2)
 
 def runEffect(ef, count = 10000):
 	while count!=0:
@@ -10,7 +12,7 @@ def runEffect(ef, count = 10000):
 			break
 		if not im:
 			StopIteration
-		launchpadPil.drawImage(im.crop((0,0,31,20)))
+		launchpads.drawImage(im.crop((0,0,31,20)))
 		count -= 1
 
 if __name__ == "__main__":

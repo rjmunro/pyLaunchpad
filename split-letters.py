@@ -22,7 +22,7 @@ if __name__=="__main__":
 			if x > (startx + 1):
 				letter = letters.pop(0)
 				print startx, x
-				im.crop((startx+1,0,x,8)).save('letters/' + letter + '.png')
+				im.crop((startx,0,x,8)).save('letters/' + letter + '.png')
 			startx = x
 
 

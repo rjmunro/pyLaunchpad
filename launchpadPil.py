@@ -24,7 +24,7 @@ def drawImage(im):
 				l = launchPadObjs[padx*2+pady]
 				l.showImage(im, 11*padx + startx, 10*pady)
 		launchPadObjs[0].poll()
-		time.sleep(.1)
+		time.sleep(.075)
 
 if __name__=="__main__":
 

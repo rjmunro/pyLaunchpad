@@ -167,8 +167,12 @@ class launchpad:
 		for x in range(9):
 			grid.append([])
 			for y in range(9):
-				r,g,b = im.getpixel(((x + offsetx) % xsize, (8-y + offsety) % ysize))[:3]
-				grid[x].append((r/64, g/64))
+				try:
+					r,g,b = im.getpixel(((x + offsetx), (8-y + offsety)))[:3]
+					grid[x].append((r/64, g/64))
+				except IndexError:
+					# We are off the side of the image
+					grid[x].append((0,0))
 		self.lightAll(grid)
 
 # I don't know if the below is needed, or if it is safe to call automatically, but the comment in the example I'm copying said:

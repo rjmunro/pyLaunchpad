@@ -5,12 +5,13 @@ import ImageDraw
 import ImageFont
 
 STEPS = 8
+LOOPS = 5
 
 def getLevelsPil():
 	levels = [random.randint(0,8) for i in range(9)]
 	im = Image.new('RGB',(31,20))
 	draw = ImageDraw.Draw(im)
-	for count in range(20):
+	for count in range(LOOPS):
 		newLevels = [random.randint(0,8) for i in range(9)]
 		for step in range(STEPS):
 			draw.rectangle((0,0,33,20),fill=(0,0,0))

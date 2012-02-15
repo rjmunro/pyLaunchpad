@@ -128,10 +128,10 @@ class Launchpad:
 		self.lightAll(grid)
 
 def setup6():
-	(width, height) = (370, 250)
+	(width, height) = (406, 250)
 	screen = pygame.display.set_mode((width, height))
 
-	xspacing = 120
+	xspacing = 132
 	yspacing = 120
 	start = 20
 	launchpads = [

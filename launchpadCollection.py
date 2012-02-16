@@ -4,7 +4,7 @@ import launchpad
 import time
 
 class LaunchpadCollection:
-	launchpadObjs = []
+	launchPadObjs = []
 	xcount = 0
 	ycount = 0
 	xskip = 0

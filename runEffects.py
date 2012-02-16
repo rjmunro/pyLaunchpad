@@ -12,7 +12,7 @@ def runEffect(ef, count = 10000):
 			break
 		if not im:
 			StopIteration
-		launchpads.drawImage(im.crop((0,0,31,20)))
+		launchpads.drawImage(im.crop((0,0)+launchpads.getTotalSize()))
 		count -= 1
 
 if __name__ == "__main__":

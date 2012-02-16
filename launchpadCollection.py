@@ -28,6 +28,11 @@ class LaunchpadCollection:
 			# Use simulator
 			self.launchPadObjs = launchpadSim.setupMany(xcount, ycount, simSize, xskip, yskip)
 
+	def getTotalSize(self):
+		x = self.xcount * (9+self.xskip) - self.xskip
+		y = self.ycount * (9+self.yskip) - self.yskip
+		return x,y
+
 	def drawImage(self, im):
 		for padx in range(self.xcount):
 			for pady in range(self.ycount):

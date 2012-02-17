@@ -26,6 +26,7 @@ class Launchpad:
 		self._window = window
 		self._xPos = xPos
 		self._yPos = yPos
+		self._size = size
 
 	def reset(self):
 		self.ledTest(0)

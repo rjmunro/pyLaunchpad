@@ -11,7 +11,7 @@ def runEffect(ef, count = 10000):
 		except StopIteration:
 			break
 		if not im:
-			StopIteration
+			break
 		launchpads.drawImage(im.crop((0,0)+launchpads.getTotalSize()))
 		launchpads.poll()
 		count -= 1

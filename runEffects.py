@@ -13,6 +13,7 @@ def runEffect(ef, count = 10000):
 		if not im:
 			StopIteration
 		launchpads.drawImage(im.crop((0,0)+launchpads.getTotalSize()))
+		launchpads.poll()
 		count -= 1
 
 if __name__ == "__main__":

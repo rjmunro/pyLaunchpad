@@ -38,6 +38,7 @@ class LaunchpadCollection:
 			for pady in range(self.ycount):
 				l = self.launchPadObjs[padx*self.ycount+pady]
 				l.showImage(im, (9+self.xskip)*padx, (9+self.yskip)*pady)
+	def poll(self):
 		self.launchPadObjs[0].poll()
 		time.sleep(.075)
 

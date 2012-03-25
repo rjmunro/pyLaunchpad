@@ -7,10 +7,10 @@ launchpads = LaunchpadCollection(3,2)
 def runEffect(ef, count = 10000):
 	while count!=0:
 		try:
-			im = ef.next()
+			im = ef.next().crop((0,0)+launchpads.getTotalSize())
 		except StopIteration:
 			break
-		launchpads.drawImage(im.crop((0,0)+launchpads.getTotalSize()))
+		launchpads.drawImage(im)
 		launchpads.poll()
 		count -= 1
 	return im

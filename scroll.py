@@ -17,13 +17,14 @@ def scrollSequence(sequence, minwidth=70):
 			yield j
 			im = j
 
-def scrollText(text, minwidth=70):
+def scrollText(text, im):
 	map = {
 		"'":"quote",
 		",":"comma",
 		".":"stop",
 	}
-	sequence = []
+	minwidth = im.size[0]
+	sequence = [im]
 	for i in text:
 		if i in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789":
 			sequence.append(Image.open("letters/%s.png" % i))

@@ -15,13 +15,15 @@ def runEffect(ef, count = 10000):
 		count -= 1
 	return im
 
+text = "Novation Launchpad is a 64 button 'music controller' that enables you to make music or mix tracks by other artists. You don't need advanced musical knowledge, just your own creativity."
+
 if __name__ == "__main__":
 	from bars import vuBarsEffect
 	from fire import fireEffect
 	from scroll import scrollImage, scrollText
 	while 1:
 		im = Image.new('RGB',(32,20))
-		im = runEffect(scrollText("Novation Launchpad is a 64 button 'music controller' that enables you to make music or mix tracks by other artists. You don't need advanced musical knowledge, just your own creativity."),100)
+		im = runEffect(scrollText(text,im),100)
 		im = runEffect(scrollImage(Image.open("images/novation-launchpad-2line.png")))
 		im = runEffect(vuBarsEffect(),100)
 		im = runEffect(fireEffect(im),100)

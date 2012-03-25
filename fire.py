@@ -22,7 +22,7 @@ def fireEffect(im, loops = 200):
 			im.putpixel((0,y),(0,0,0))
 			im.putpixel((xsize-1,y),(0,0,0))
 			
-			for x in range(1,xsize-2):
+			for x in range(1,xsize-1):
 				a = im.getpixel((x-1,y+1))
 				b = im.getpixel((x,y+1))
 				c = im.getpixel((x+1,y+1))

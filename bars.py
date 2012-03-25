@@ -6,8 +6,9 @@ import ImageDraw
 # Amount of frames to spend going to destination before new random destination is picked.
 STEPS = 8
 
-def vuBarsEffect(width=2, height=9, space=1, number=3):
-	levels = [random.randint(0,height) for i in range(number)]
+def vuBarsEffect(width=2, height=9, space=1, number=3, levels=False):
+	if (levels == False):
+		levels = [0]*number
 	im = Image.new('RGB',((width+space)*number,height))
 	draw = ImageDraw.Draw(im)
 	while 1:

@@ -2,7 +2,7 @@
 import Image
 from launchpadCollection import LaunchpadCollection
 
-launchpads = LaunchpadCollection(3,2)
+launchpads = LaunchpadCollection(6,1)
 
 def runEffect(ef, count = 10000):
 	while count!=0:
@@ -22,8 +22,8 @@ if __name__ == "__main__":
 	from fire import fireEffect
 	from scroll import scrollImage, scrollText
 	while 1:
-		im = Image.new('RGB',(32,20))
+		im = Image.new('RGB',(64,9))
 		im = runEffect(scrollText(text,im),100)
-		im = runEffect(scrollImage(Image.open("images/novation-launchpad-2line.png")))
 		im = runEffect(vuBarsEffect(),100)
 		im = runEffect(fireEffect(im),100)
+		im = runEffect(scrollSequence([im,Image.open("images/novation-launchpad.png")]))

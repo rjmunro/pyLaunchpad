@@ -8,7 +8,7 @@ def scrollImage(im, minwidth=0):
 
 def scrollSequence(sequence, minwidth=70):
 	im = Image.new('RGB',(1,1))
-	for i in sequence[1:]:
+	for i in sequence:
 		xsize,ysize = im.size
 		im = im.crop((0,0, xsize+i.size[0], max(i.size[1],ysize)))
 		im.paste(i,(xsize,0))

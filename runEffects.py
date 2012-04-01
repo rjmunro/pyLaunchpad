@@ -20,7 +20,7 @@ text = "Novation Launchpad is a 64 button 'music controller' that enables you to
 if __name__ == "__main__":
 	from bars import vuBarsEffect
 	from fire import fireEffect
-	from scroll import scrollImage, scrollText
+	from scroll import scrollImage, scrollText, scrollSequence
 	while 1:
 		im = Image.new('RGB',(64,9))
 		im = runEffect(scrollText(text,im),100)

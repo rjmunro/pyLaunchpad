@@ -13,7 +13,10 @@ def fireEffect(im, loops = 200):
 	while loops!=0:
 		# Draw bottom row randomly
 		for x in range(xsize):
-			temp = random.randint(100,768)
+			if (loops>ysize):
+				temp = random.randint(100,768)
+			else:
+				temp = 0
 			im.putpixel((x,ysize-1),(temp2color(temp)))
 
 		# Draw all other rows by averaging those below

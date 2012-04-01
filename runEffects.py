@@ -29,7 +29,6 @@ if __name__ == "__main__":
 		im = runEffect(scrollSequence([im,Image.open("images/novation-launchpad.png")]))
 		im = runEffect(multiEffect(im, [
 			( vuBarsEffect(), (0,0,9,9) ),
-			(fireEffect(Image.new('RGB',(42,9))),(11,0,53,9)),
 			( scrollText(text, Image.new('RGB',(42,9))), (11,0,53,9) ),
 			( vuBarsEffect(), (55,0,64,9) ),
 		]))

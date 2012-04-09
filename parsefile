@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+from bars import vuBarsEffect
+from fire import fireEffect
+from scroll import scrollImage, scrollText, scrollSequence
+from multiEffect import multiEffect
+
+def parse(lines):
+	errors = []
+	lineNo = 0
+	for line in lines:
+		lineNo += 1
+		line = line.strip()
+		if not line or line[0]=='#':
+			# Skip blank lines and comments
+			continue
+		effect, parameter = line.split(':',1)
+		if effect=="text":
+			pass
+		elif effect=="fire":
+			if not parameter.isdigit():
+				errors.append("Fire effect takes a number")
+		elif effect=="bars":
+			if not parameter.isdigit():
+				errors.append("Fire effect takes a number")
+			pass
+		elif effect=="textfire":
+			pass
+		elif effect=="textbars":
+			pass
+		elif effect=="image":
+			pass
+		else:
+			errors.append("Unknown effect on line %s" % lineNo)
+		print effect
+		print parameter
+
+lines = list(open("sign.txt",'r'))
+parse(lines)
+

@@ -1,0 +1,16 @@
+# Lines starting # are ignored
+# Lines are in the format:
+#   effectname:parameter
+# Effects are:
+#   text
+#   fire
+#   bars
+#   textfire
+#   textbars
+#   image
+image:novation-launchpad.png
+text:The Novation Launchpad is a 64 button music controller.
+fire:100
+bars:100
+textfire:Buy a launchpad today!
+textbars:Includes Ableton Live Lite

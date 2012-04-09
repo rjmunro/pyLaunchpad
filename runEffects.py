@@ -3,6 +3,7 @@ import Image
 from launchpadCollection import LaunchpadCollection
 
 launchpads = LaunchpadCollection(6,1)
+im = Image.new('RGB', launchpads.getTotalSize())
 
 def runEffect(ef, count = 10000):
 	while count!=0:
@@ -15,15 +16,15 @@ def runEffect(ef, count = 10000):
 		count -= 1
 	return im
 
-text = "Novation Launchpad is a 64 button 'music controller' that enables you to make music or mix tracks by other artists. You don't need advanced musical knowledge, just your own creativity."
 
 if __name__ == "__main__":
 	from bars import vuBarsEffect
 	from fire import fireEffect
 	from scroll import scrollImage, scrollText, scrollSequence
 	from multiEffect import multiEffect
+
+	text = "Novation Launchpad is a 64 button 'music controller' that enables you to make music or mix tracks by other artists. You don't need advanced musical knowledge, just your own creativity."
 	while 1:
-		im = Image.new('RGB',(64,9))
 		im = runEffect(scrollText(text,im),100)
 		im = runEffect(fireEffect(im,100),100)
 		im = runEffect(scrollSequence([im,Image.open("images/novation-launchpad.png")]))

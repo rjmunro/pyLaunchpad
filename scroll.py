@@ -17,7 +17,7 @@ def scrollSequence(sequence, minwidth=70):
 			yield j
 			im = j
 
-def scrollText(text, im):
+def scrollText(text, im, padBlank=True):
 	map = {
 		"'":"quote",
 		",":"comma",
@@ -32,5 +32,6 @@ def scrollText(text, im):
 			sequence.append(Image.open("letters/%s.png" % map[i]))
 		else:
 			sequence.append(Image.open("letters/space.png"))
-
+	if padBlank:
+		sequence.append(Image.new('RGB', im.size))
 	return scrollSequence(sequence, minwidth)

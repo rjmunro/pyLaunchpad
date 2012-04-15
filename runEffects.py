@@ -75,6 +75,7 @@ def parseInstructions(lines, im):
 			raise launchpadException("Unknown effect", lineNo)
 
 def checkForFiles():
+	found = False
 	import os,shutil,sys
 	thisFolder = os.path.dirname(sys.argv[0])
 	mountFolder = "/media/"
@@ -84,13 +85,18 @@ def checkForFiles():
 		for vol in volumes:
 			if os.path.exists(mountFolder + vol + "/sign.txt"):
 				shutil.copy(mountFolder + vol + "/sign.txt", thisFolder + "/sign.txt")
+				print "Copied from %s to %s" % (mountFolder + vol + "/sign.txt", thisFolder + "/sign.txt")
+				found = True
 			if os.path.exists(mountFolder + vol + "/launchpadImages"):
 				images = os.listdir(mountFolder + vol + "/launchpadImages")
 				for image in images:
-					shutil.copy(mountFolder + vol + "/launchpadImages/" + image, thisFolder + "/images/image/" + image)
+					shutil.copy(mountFolder + vol + "/launchpadImages/" + image, thisFolder + "/images/" + image)
+					print "Copied from %s to %s" % (mountFolder + vol + "/launchpadImages/" + image, thisFolder + "/images/" + image)
+					found = True
 	except:
 		raise
 		pass
+	return found
 
 if __name__ == "__main__":
 	checkForFiles()

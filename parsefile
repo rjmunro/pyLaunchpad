@@ -3,9 +3,15 @@ from bars import vuBarsEffect
 from fire import fireEffect
 from scroll import scrollImage, scrollText, scrollSequence
 from multiEffect import multiEffect
+from runEffects import runEffect,im
+import Image
+
+def error(text):
+	global im
+	im = scrollText(text,im)
 
 def parse(lines):
-	errors = []
+	global im
 	lineNo = 0
 	for line in lines:
 		lineNo += 1
@@ -15,24 +21,38 @@ def parse(lines):
 			continue
 		effect, parameter = line.split(':',1)
 		if effect=="text":
-			pass
+			im = runEffect(scrollText(parameter,im))
 		elif effect=="fire":
 			if not parameter.isdigit():
-				errors.append("Fire effect takes a number")
+				error("Fire effect takes a number")
+			im = runEffect(fireEffect(im,100),100)
 		elif effect=="bars":
 			if not parameter.isdigit():
-				errors.append("Fire effect takes a number")
-			pass
+				error("Bars effect takes a number")
+			im = runEffect(multiEffect(im, [
+					( vuBarsEffect(), (0,0,9,9) ),
+					( vuBarsEffect(), (11,0,20,9) ),
+					( vuBarsEffect(), (22,0,31,9) ),
+					( vuBarsEffect(), (33,0,42,9) ),
+					( vuBarsEffect(), (44,0,53,9) ),
+					( vuBarsEffect(), (55,0,64,9) ),
+			]),int(parameter))
 		elif effect=="textfire":
-			pass
+			im = runEffect(multiEffect(im, [
+					( fireEffect(Image.new('RGB', (9,9))), (0,0,9,9) ),
+					( scrollText(parameter, Image.new('RGB',(42,9))), (11,0,53,9) ),
+					( fireEffect(Image.new('RGB', (9,9))), (55,0,64,9) ),
+			]))
 		elif effect=="textbars":
-			pass
+			im = runEffect(multiEffect(im, [
+					( vuBarsEffect(), (0,0,9,9) ),
+					( scrollText(parameter, Image.new('RGB',(42,9))), (11,0,53,9) ),
+					( vuBarsEffect(), (55,0,64,9) ),
+			]))
 		elif effect=="image":
-			pass
+			scrollSequence([im,Image.open('images/'+parameter)])
 		else:
-			errors.append("Unknown effect on line %s" % lineNo)
-		print effect
-		print parameter
+			error("Unknown effect on line %s" % lineNo)
 
 lines = list(open("sign.txt",'r'))
 parse(lines)

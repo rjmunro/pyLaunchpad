@@ -69,14 +69,31 @@ def parseInstructions(lines, im):
 					( vuBarsEffect(), (55,0,64,9) ),
 			]))
 		elif effect=="image":
-			#TODO: Check if image exists, check /media/ if it doesn't
 			scrolledImage = Image.open('images/'+parameter)
 			im = runEffect(scrollSequence([im,scrolledImage,im]),1000)
 		else:
 			raise launchpadException("Unknown effect", lineNo)
 
+def checkForFiles():
+	import os,shutil,sys
+	thisFolder = os.path.dirname(sys.argv[0])
+	mountFolder = "/media/"
+	try:
+		volumes = os.listdir(mountFolder)
+		print volumes
+		for vol in volumes:
+			if os.path.exists(mountFolder + vol + "/sign.txt"):
+				shutil.copy(mountFolder + vol + "/sign.txt", thisFolder + "/sign.txt")
+			if os.path.exists(mountFolder + vol + "/launchpadImages"):
+				images = os.listdir(mountFolder + vol + "/launchpadImages")
+				for image in images:
+					shutil.copy(mountFolder + vol + "/launchpadImages/" + image, thisFolder + "/images/image/" + image)
+	except:
+		raise
+		pass
+
 if __name__ == "__main__":
-	#TODO: Check for /media/*/sign.txt for and copy it to current folder
+	checkForFiles()
 
 	lines = list(open("sign.txt",'r'))
 	while 1:

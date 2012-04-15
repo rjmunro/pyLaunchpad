@@ -99,11 +99,12 @@ def checkForFiles():
 	return found
 
 if __name__ == "__main__":
-	checkForFiles()
 
 	lines = list(open("sign.txt",'r'))
 	while 1:
 		try:
+			if checkForFiles():
+				im = runEffect(scrollText("New effects loaded. Reboot to use",im))
 			parseInstructions(lines,im)
 		except launchpadException as e:
 			im = runEffect(scrollText(str(e),im))

@@ -2,8 +2,19 @@
 import Image
 from launchpadCollection import LaunchpadCollection
 
+from bars import vuBarsEffect
+from fire import fireEffect
+from scroll import scrollImage, scrollText, scrollSequence
+from multiEffect import multiEffect
+
 launchpads = LaunchpadCollection(6,1)
 im = Image.new('RGB', launchpads.getTotalSize())
+
+class launchpadException(Exception):
+	def __init__(self, value, line='unknown'):
+		self.value = value + " at line %s" % line
+	def __str__(self):
+		return repr(self.value)
 
 def runEffect(ef, count = 10000):
 	while count!=0:
@@ -17,11 +28,6 @@ def runEffect(ef, count = 10000):
 	return im
 
 def parseInstructions(lines, im):
-	from bars import vuBarsEffect
-	from fire import fireEffect
-	from scroll import scrollImage, scrollText, scrollSequence
-	from multiEffect import multiEffect
-
 	lineNo = 0
 	for line in lines:
 		lineNo += 1
@@ -29,16 +35,19 @@ def parseInstructions(lines, im):
 		if not line or line[0]=='#':
 			# Skip blank lines and comments
 			continue
-		effect, parameter = line.split(':',1)
+		try:
+			effect, parameter = line.split(':',1)
+		except ValueError:
+			raise launchpadException("No colon",lineNo)
 		if effect=="text":
 			im = runEffect(scrollText(parameter,im))
 		elif effect=="fire":
 			if not parameter.isdigit():
-				error("Fire effect takes a number")
+				raise launchpadException("Fire effect takes a number", lineNo)
 			im = runEffect(fireEffect(im,100),100)
 		elif effect=="bars":
 			if not parameter.isdigit():
-				error("Bars effect takes a number")
+				raise launchpadException("Bars effect takes a number", lineNo)
 			im = runEffect(multiEffect(im, [
 					( vuBarsEffect(), (0,0,9,9) ),
 					( vuBarsEffect(), (11,0,20,9) ),
@@ -64,12 +73,15 @@ def parseInstructions(lines, im):
 			scrolledImage = Image.open('images/'+parameter)
 			im = runEffect(scrollSequence([im,scrolledImage,im]),1000)
 		else:
-			error("Unknown effect on line %s" % lineNo)
+			raise launchpadException("Unknown effect", lineNo)
 
 if __name__ == "__main__":
 	#TODO: Check for /media/*/sign.txt for and copy it to current folder
 
 	lines = list(open("sign.txt",'r'))
 	while 1:
-		parseInstructions(lines,im)
-
+		try:
+			parseInstructions(lines,im)
+		except launchpadException as e:
+			im = runEffect(scrollText(str(e),im))
+			raise

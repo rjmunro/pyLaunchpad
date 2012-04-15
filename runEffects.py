@@ -84,14 +84,14 @@ def checkForFiles():
 		print volumes
 		for vol in volumes:
 			if os.path.exists(mountFolder + vol + "/sign.txt"):
+				print "Copying from %s to %s" % (mountFolder + vol + "/sign.txt", thisFolder + "/sign.txt")
 				shutil.copy(mountFolder + vol + "/sign.txt", thisFolder + "/sign.txt")
-				print "Copied from %s to %s" % (mountFolder + vol + "/sign.txt", thisFolder + "/sign.txt")
 				found = True
 			if os.path.exists(mountFolder + vol + "/launchpadImages"):
 				images = os.listdir(mountFolder + vol + "/launchpadImages")
 				for image in images:
+					print "Copying from %s to %s" % (mountFolder + vol + "/launchpadImages/" + image, thisFolder + "/images/" + image)
 					shutil.copy(mountFolder + vol + "/launchpadImages/" + image, thisFolder + "/images/" + image)
-					print "Copied from %s to %s" % (mountFolder + vol + "/launchpadImages/" + image, thisFolder + "/images/" + image)
 					found = True
 	except:
 		raise

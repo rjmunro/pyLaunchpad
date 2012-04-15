@@ -61,7 +61,8 @@ def parseInstructions(lines, im):
 			]))
 		elif effect=="image":
 			#TODO: Check if image exists, check /media/ if it doesn't
-			scrollSequence([im,Image.open('images/'+parameter)])
+			scrolledImage = Image.open('images/'+parameter)
+			im = runEffect(scrollSequence([im,scrolledImage,im]),1000)
 		else:
 			error("Unknown effect on line %s" % lineNo)
 

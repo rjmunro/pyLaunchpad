@@ -70,7 +70,7 @@ def parseInstructions(lines, im):
 			]))
 		elif effect=="image":
 			scrolledImage = Image.open('images/'+parameter)
-			im = runEffect(scrollSequence([im,scrolledImage,im]),1000)
+			im = runEffect(scrollSequence([im,scrolledImage,Image.new('RGB', im.size)]),1000)
 		else:
 			raise launchpadException("Unknown effect", lineNo)
 

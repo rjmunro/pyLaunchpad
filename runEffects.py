@@ -77,7 +77,7 @@ def parseInstructions(lines, im):
 def checkForFiles():
 	found = False
 	import os,shutil,sys
-	thisFolder = os.path.dirname(sys.argv[0])
+	thisFolder = os.path.dirname(os.path.abspath(__file__))
 	mountFolder = "/media/"
 	try:
 		volumes = os.listdir(mountFolder)

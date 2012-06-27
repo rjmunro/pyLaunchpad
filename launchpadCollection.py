@@ -1,5 +1,4 @@
 #!/usr/bin/env python2.7
-import launchpadSim
 import launchpad
 import time
 
@@ -26,6 +25,7 @@ class LaunchpadCollection:
 				self.launchPadObjs[-1].reset()
 		else:
 			# Use simulator
+			import launchpadSim
 			self.launchPadObjs = launchpadSim.setupMany(xcount, ycount, simSize, xskip, yskip)
 
 	def getTotalSize(self):

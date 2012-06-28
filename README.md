@@ -14,6 +14,10 @@ You can install portMidi with:
 
 Support for the Launchpad was added in Linux Kernel 2.6.37, so Linuxes with a newer kernel will not need any special drivers.
 
+To use the simulator, you need pygame:
+
+    apt-get install python-pygame
+
 Mac OS X
 --------
 I have fond the easiest way is to install Macports and run:
@@ -21,6 +25,15 @@ I have fond the easiest way is to install Macports and run:
     port install py27-game +portmidi
 
 You will also need to install the Novation USB driver
+
+Text
+----
+
+To prepare characters images to display text, use:
+    ./split-letters.py images/text.png
+
+To rotate the text (for vertical display - this is a bit rubbish):
+    mogrify -rotate 270 -gravity Center -crop '8x8+0+0!' -background black -flatten letters/*.png
 
 License and Author
 ==================
